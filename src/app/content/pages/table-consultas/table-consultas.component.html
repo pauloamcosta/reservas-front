@@ -1,0 +1,20 @@
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Nome</th>
+    <th scope="col">Documento</th>
+    <th scope="col">Valor Gasto (R$)</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let checkin of checkins; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>{{ checkin.nome }}
+    </td>
+    <td>{{ checkin.documento }}</td>
+    <td>{{ checkin.valorGasto }}</td>
+  </tr>
+  </tbody>
+</table>
