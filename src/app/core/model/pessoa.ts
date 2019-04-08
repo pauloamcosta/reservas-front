@@ -1,7 +1,10 @@
-export interface Pessoa {
-    id: number;
-    nome: string;
-    documento: number;
-    telefone: string;
-  }
-  
+
+  export class Pessoa{
+
+    constructor(
+        public id:number, 
+        public nome?: string,
+        public documento?: string,
+        public telefone?:string
+    ){}
+}

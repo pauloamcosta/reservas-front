@@ -10,6 +10,10 @@ import { CardComponent } from './content/layout/card/card.component';
 import { DashboardComponent } from './content/pages/dashboard.component';
 import { FormCheckInComponent } from './content/pages/form-check-in/form-check-in.component';
 import { TableConsultasComponent } from './content/pages/table-consultas/table-consultas.component';
+import { HttpModule } from '@angular/http';
+import { JsonService } from './core/service/json.service';
+import { Globals } from './core/globals';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,9 +29,16 @@ import { TableConsultasComponent } from './content/pages/table-consultas/table-c
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,		
+    HttpModule,
+    FormsModule, 
+    ReactiveFormsModule
+
   ],
-  providers: [],
+  providers: [
+    JsonService,
+    Globals
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,54 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-interface Checkins {
-  nome: string;
-  documento: string;
-  valorGasto: string;
-}
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Globals } from 'src/app/core/globals';
+import { JsonService } from 'src/app/core/service/json.service';
+import { CheckIn } from 'src/app/core/model/checkin';
 
-const CHECKINS: Checkins[] = [
-  {
-    nome: 'Eduardo Silva',
-    documento: '34234234',
-    valorGasto: '2500,00'
-  },
-  {
-    nome: 'Larissa Silva',
-    documento: '32323234',
-    valorGasto: '1000,00'
-  },
-  {
-    nome: 'Jose Silva',
-    documento: '34234333',
-    valorGasto: '2000,00'
-  },
-  {
-    nome: 'Paulo Melo',
-    documento: '34234445',
-    valorGasto: '120,00'
-  },
-  {
-    nome: 'João Costa',
-    documento: '02002344',
-    valorGasto: '240,00'
-  },
-  {
-    nome: 'Mario Melo',
-    documento: '232311414',
-    valorGasto: '500,00'
-  },
- 
-];
 @Component({
   selector: 'app-table-consultas',
   templateUrl: './table-consultas.component.html',
   styleUrls: ['./table-consultas.component.scss']
 })
 export class TableConsultasComponent implements OnInit {
+  private baseUrl: string = this.globals.URL;
+  private checkinsLoaded: CheckIn[] = [];
 
-  constructor() { }
-  checkins = CHECKINS;
+  constructor(
+    private globals: Globals,
+    private jsonService: JsonService,
+    private ref: ChangeDetectorRef
+  ) { }
+  //checkins = CHECKINS;
 
   ngOnInit() {
+    this.loadCheckins(`${this.baseUrl}/checkins`);
+  }
+  
+  private loadCheckins(url: string): void {
+    this.jsonService.getContent(url).subscribe(checkins => {
+      this.checkinsLoaded = checkins['content'];
+      console.log(this.checkinsLoaded);
+      this.ref.detectChanges();
+    })
   }
 
 }
